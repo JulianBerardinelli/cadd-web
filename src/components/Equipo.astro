@@ -1,5 +1,6 @@
 ---
 import Card from './ui/Card.astro';
+import { asset } from '../lib/asset.ts';
 
 // NOTA (del handoff): los nombres de archivo NO coinciden con la persona.
 // El retrato de Germán E. Campisi es `christian-berardinelli.jpeg` y el de
@@ -30,7 +31,7 @@ const team = [
           <div class="team-item" data-reveal data-stagger={i}>
             <Card hover padding="0" fill>
               <div class="team-card__media">
-                <img src={`/team/${m.photo}`} alt={m.name} width="240" height="240" loading="lazy" />
+                <img src={asset(`team/${m.photo}`)} alt={m.name} width="240" height="240" loading="lazy" />
               </div>
               <div class="team-card__text">
                 <div class="team-card__name">{m.name}</div>

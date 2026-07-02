@@ -1,6 +1,7 @@
 ---
 import Button from './ui/Button.astro';
 import Icon from './Icon.astro';
+import { asset } from '../lib/asset.ts';
 ---
 
 <div
@@ -15,7 +16,7 @@ import Icon from './Icon.astro';
 
   <div class="modal__panel" role="document">
     <div class="modal__header">
-      <img src="/logo/cadd-emblem.svg" width="48" height="48" alt="" />
+      <img src={asset('logo/cadd-emblem.svg')} width="48" height="48" alt="" />
       <div>
         <div class="modal__title" id="contact-modal-title">Solicitar convenio</div>
         <div class="modal__sub">Acta de intención · Ciclo 2026</div>

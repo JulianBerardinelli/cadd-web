@@ -1,5 +1,6 @@
 ---
 import Button from './ui/Button.astro';
+import { asset } from '../lib/asset.ts';
 ---
 
 <footer class="footer">
@@ -18,7 +19,7 @@ import Button from './ui/Button.astro';
 
     <div class="footer__bottom">
       <div class="footer__brand">
-        <img src="/logo/cadd-emblem.svg" width="56" height="56" alt="" />
+        <img src={asset('logo/cadd-emblem.svg')} width="56" height="56" alt="" />
         <div class="footer__brand-text">
           <span class="footer__brand-name">Consejo Argentino<br />de Diplomacia Deportiva</span>
           <span class="footer__brand-tag">Nexo institucional · técnico · neutral</span>

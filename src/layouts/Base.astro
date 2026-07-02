@@ -1,6 +1,7 @@
 ---
 import '../styles/tokens.css';
 import '../styles/app.css';
+import { asset } from '../lib/asset.ts';
 
 interface Props {
   title?: string;
@@ -12,8 +13,10 @@ const {
   description = 'El Consejo Argentino de Diplomacia Deportiva es un nexo institucional, técnico y neutral que vincula al cuerpo diplomático acreditado en Argentina con el ecosistema del deporte, la academia y la gestión social.',
 } = Astro.props;
 
-const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).href;
-const ogImage = new URL('/imagery/hero-handshake.png', Astro.site ?? Astro.url).href;
+const origin = Astro.site ?? new URL('/', Astro.url);
+const canonical = new URL(Astro.url.pathname, origin).href;
+const ogImage = new URL(asset('imagery/hero-handshake.png'), origin).href;
+const faviconHref = asset('logo/cadd-emblem.svg');
 ---
 
 <!doctype html>
@@ -28,7 +31,7 @@ const ogImage = new URL('/imagery/hero-handshake.png', Astro.site ?? Astro.url).
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#08172b" />
 
-    <link rel="icon" type="image/svg+xml" href="/logo/cadd-emblem.svg" />
+    <link rel="icon" type="image/svg+xml" href={faviconHref} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

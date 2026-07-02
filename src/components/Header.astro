@@ -1,6 +1,7 @@
 ---
 import Button from './ui/Button.astro';
 import Icon from './Icon.astro';
+import { asset } from '../lib/asset.ts';
 
 const nav = [
   { href: '#mision', label: 'Misión' },
@@ -14,7 +15,7 @@ const nav = [
 <header class="site-header">
   <div class="site-header__row">
     <a href="#top" class="brand" aria-label="CADD — inicio">
-      <img src="/logo/cadd-emblem.svg" width="42" height="42" alt="" class="brand__mark" />
+      <img src={asset('logo/cadd-emblem.svg')} width="42" height="42" alt="" class="brand__mark" />
       <span class="brand__name">Consejo Argentino<br />de Diplomacia Deportiva</span>
     </a>
 
