@@ -1,0 +1,220 @@
+/* ============================================================
+   CADD Design System — tokens (fuente de verdad del handoff).
+   Colores, tipografía, espaciado, efectos y resets base.
+   Las webfonts se cargan con <link> + preconnect en el <head>
+   del layout (ver Base.astro), no con @import, por performance.
+   ============================================================ */
+
+/* ============================================================
+   Color tokens
+   ============================================================ */
+:root {
+  /* ---- Brand scales -------------------------------------- */
+
+  /* Midnight — the institutional navy. Primary brand & dark surfaces. */
+  --midnight-900: #08172b; /* deepest — page base on dark */
+  --midnight-800: #0b1f38;
+  --midnight-700: #0e2a4a; /* core brand navy */
+  --midnight-600: #163a60;
+  --midnight-500: #1f4d7a;
+  --midnight-400: #36699c;
+  --midnight-300: #5c8bbd;
+
+  /* Gold — antique/champagne prestige. Seals, accents, emphasis. */
+  --gold-700: #8a6d2f;
+  --gold-600: #a8853f;
+  --gold-500: #c2a15a; /* core accent gold */
+  --gold-400: #d4b878;
+  --gold-300: #e6d3a3;
+  --gold-200: #f1e6c9;
+
+  /* Celeste — Argentine sky blue. National identity, secondary accent. */
+  --celeste-600: #4a8ec4;
+  --celeste-500: #6ca9dc; /* core celeste */
+  --celeste-400: #8fc0e6;
+  --celeste-300: #b6d6ef;
+  --celeste-200: #dbeaf8;
+
+  /* Field — deep football-pitch green. Sport contexts, used sparingly. */
+  --field-700: #1f4632;
+  --field-600: #2c5e44;
+  --field-500: #3c7a59;
+
+  /* ---- Neutrals — warm, paper-leaning -------------------- */
+  --ink-900: #14181c; /* near-black text on light */
+  --ink-800: #232a31;
+  --ink-700: #3a434c;
+  --ink-600: #54606b;
+  --ink-500: #707d88;
+  --ink-400: #94a0aa;
+  --ink-300: #bcc5cc;
+  --ink-200: #dde3e7;
+  --ink-100: #ecf0f2;
+
+  --paper-100: #ffffff;
+  --paper-200: #f7f4ee; /* warm parchment surface */
+  --paper-300: #f0ebe0; /* deeper parchment */
+  --paper-400: #e6dfd0;
+
+  /* ---- Semantic status ----------------------------------- */
+  --status-success: #3c7a59;
+  --status-success-soft: #e2efe8;
+  --status-warning: #b8862c;
+  --status-warning-soft: #f6ecd4;
+  --status-danger: #a63a31;
+  --status-danger-soft: #f4e0dd;
+  --status-info: #4a8ec4;
+  --status-info-soft: #dbeaf8;
+
+  /* ---- Semantic aliases ---------------------------------- */
+
+  /* Surfaces — light mode (default) */
+  --surface-page: var(--paper-200);
+  --surface-card: var(--paper-100);
+  --surface-sunken: var(--paper-300);
+  --surface-inverse: var(--midnight-800);
+  --surface-brand: var(--midnight-700);
+
+  /* Text */
+  --text-strong: var(--ink-900);
+  --text-body: var(--ink-700);
+  --text-muted: var(--ink-500);
+  --text-faint: var(--ink-400);
+  --text-on-brand: var(--paper-200);
+  --text-on-brand-muted: #9db4cc;
+  --text-accent: var(--gold-600);
+  --text-link: var(--midnight-600);
+
+  /* Borders / lines */
+  --border-hairline: var(--ink-200);
+  --border-default: var(--ink-300);
+  --border-strong: var(--ink-400);
+  --border-on-brand: rgba(255, 255, 255, 0.14);
+  --border-gold: var(--gold-500);
+
+  /* Accents */
+  --accent-primary: var(--midnight-700);
+  --accent-primary-hover: var(--midnight-600);
+  --accent-gold: var(--gold-500);
+  --accent-gold-hover: var(--gold-400);
+  --accent-celeste: var(--celeste-500);
+
+  /* Focus */
+  --focus-ring: var(--celeste-500);
+}
+
+/* ============================================================
+   Typography tokens
+   ============================================================ */
+:root {
+  /* ---- Families ------------------------------------------ */
+  --font-serif: 'Spectral', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', 'Menlo', monospace;
+
+  --font-display: var(--font-serif);
+  --font-heading: var(--font-sans);
+  --font-body: var(--font-sans);
+  --font-eyebrow: var(--font-mono);
+
+  /* ---- Type scale (px-based) ----------------------------- */
+  --text-display-2xl: 76px;
+  --text-display-xl: 60px;
+  --text-display-lg: 46px;
+  --text-display-md: 36px;
+  --text-heading-lg: 28px;
+  --text-heading-md: 22px;
+  --text-heading-sm: 18px;
+  --text-body-lg: 18px;
+  --text-body-md: 16px;
+  --text-body-sm: 14px;
+  --text-caption: 13px;
+  --text-eyebrow: 12px;
+
+  /* ---- Weights ------------------------------------------- */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-black: 800;
+
+  /* ---- Line heights -------------------------------------- */
+  --leading-tight: 1.04;
+  --leading-snug: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  /* ---- Letter spacing ------------------------------------ */
+  --tracking-tight: -0.02em;
+  --tracking-snug: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.04em;
+  --tracking-eyebrow: 0.18em;
+  --tracking-wider: 0.26em;
+}
+
+/* ============================================================
+   Spacing, radius, sizing
+   ============================================================ */
+:root {
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --container-max: 1200px;
+  --container-narrow: 760px;
+  --gutter: var(--space-6);
+
+  --radius-none: 0;
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+  --radius-card: var(--radius-lg);
+
+  --control-height-sm: 32px;
+  --control-height-md: 40px;
+  --control-height-lg: 48px;
+  --border-width: 1px;
+  --border-width-strong: 1.5px;
+}
+
+/* ============================================================
+   Elevation, motion, effects
+   ============================================================ */
+:root {
+  --shadow-xs: 0 1px 2px rgba(20, 24, 28, 0.06);
+  --shadow-sm: 0 1px 3px rgba(20, 24, 28, 0.08), 0 1px 2px rgba(20, 24, 28, 0.04);
+  --shadow-md: 0 4px 12px rgba(11, 31, 56, 0.08), 0 2px 4px rgba(20, 24, 28, 0.05);
+  --shadow-lg: 0 12px 28px rgba(11, 31, 56, 0.12), 0 4px 8px rgba(20, 24, 28, 0.06);
+  --shadow-xl: 0 24px 56px rgba(11, 31, 56, 0.18);
+
+  --shadow-gold: 0 0 0 1px rgba(194, 161, 90, 0.4), 0 8px 24px rgba(194, 161, 90, 0.16);
+
+  --ring-focus: 0 0 0 3px rgba(108, 169, 220, 0.45);
+  --ring-gold: 0 0 0 3px rgba(194, 161, 90, 0.35);
+
+  --ease-standard: cubic-bezier(0.2, 0, 0.1, 1);
+  --ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --duration-fast: 120ms;
+  --duration-base: 200ms;
+  --duration-slow: 320ms;
+
+  --blur-panel: 14px;
+  --overlay-scrim: rgba(8, 23, 43, 0.55);
+}

@@ -1,0 +1,92 @@
+---
+import Card from './ui/Card.astro';
+import ProgressBar from './ui/ProgressBar.astro';
+
+const objetivos = [
+  {
+    n: '01',
+    title: 'Acuerdos Marco',
+    body: 'Establecer canales formales con al menos 5 misiones diplomáticas clave durante el primer ciclo.',
+    value: 60,
+  },
+  {
+    n: '02',
+    title: 'Programas Específicos',
+    body: 'Desplegar programas a nivel micro que lleven actividades de naciones extranjeras al territorio de los clubes locales.',
+    value: 35,
+  },
+  {
+    n: '03',
+    title: 'Asesoramiento Técnico',
+    body: 'Brindar asesoramiento al sector público y parlamentario en materia de legislación deportiva e internacional.',
+    value: 80,
+  },
+];
+---
+
+<section id="objetivos" class="section objetivos">
+  <div class="container">
+    <div class="section-head objetivos__head" data-reveal>
+      <span class="eyebrow eyebrow--gold">Objetivos estratégicos</span>
+      <h2>Tres frentes para el ciclo piloto</h2>
+      <p>Cada objetivo articula la red sin comprometer la autonomía del Consejo.</p>
+    </div>
+
+    <div class="objetivos__grid">
+      {
+        objetivos.map((o, i) => (
+          <div data-reveal data-stagger={i}>
+            <Card variant="inverse" padding="30px" fill>
+              <span class="objetivos__num tnum">{o.n}</span>
+              <h3 class="objetivos__title">{o.title}</h3>
+              <p class="objetivos__body">{o.body}</p>
+              <div class="objetivos__progress">
+                <ProgressBar value={o.value} tone="gold" showValue label="Avance ciclo 2026" />
+              </div>
+            </Card>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .objetivos { background: var(--midnight-800); }
+  .objetivos__head h2 { color: var(--paper-100); }
+  .objetivos__head p { color: var(--text-on-brand-muted); }
+
+  .objetivos__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: stretch;
+  }
+  .objetivos__num {
+    font-family: var(--font-mono);
+    font-size: 40px;
+    font-weight: var(--weight-semibold);
+    color: var(--gold-400);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .objetivos__title {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: 23px;
+    color: var(--paper-100);
+    margin: 8px 0 10px;
+  }
+  .objetivos__body {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-on-brand-muted);
+    min-height: 88px;
+  }
+  .objetivos__progress { margin-top: 8px; }
+
+  @media (max-width: 860px) {
+    .objetivos__grid { grid-template-columns: 1fr; }
+    .objetivos__body { min-height: 0; }
+  }
+</style>

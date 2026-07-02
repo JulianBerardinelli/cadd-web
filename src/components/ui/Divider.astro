@@ -1,0 +1,51 @@
+---
+interface Props {
+  label?: string;
+  class?: string;
+}
+const { label, class: className } = Astro.props;
+---
+
+{
+  label ? (
+    <div class:list={['divider', className]}>
+      <span class="divider__label">{label}</span>
+    </div>
+  ) : (
+    <hr class:list={['divider divider--plain', className]} />
+  )
+}
+
+<style>
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    border: 0;
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-hairline);
+  }
+  .divider__label {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  .divider--plain {
+    display: block;
+    height: 1px;
+    background: var(--border-hairline);
+    margin: 0;
+  }
+  .divider--plain::before,
+  .divider--plain::after {
+    content: none;
+  }
+</style>

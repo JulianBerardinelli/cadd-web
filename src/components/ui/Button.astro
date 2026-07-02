@@ -1,0 +1,111 @@
+---
+type Variant = 'gold' | 'primary' | 'secondary';
+type Size = 'sm' | 'md' | 'lg';
+
+interface Props {
+  variant?: Variant;
+  size?: Size;
+  href?: string;
+  type?: 'button' | 'submit';
+  fullWidth?: boolean;
+  onBrand?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  fullWidth = false,
+  onBrand = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  'btn',
+  `btn--${variant}`,
+  `btn--${size}`,
+  fullWidth && 'btn--full',
+  onBrand && 'btn--on-brand',
+  className,
+];
+
+const Tag = href ? 'a' : 'button';
+const tagProps = href ? { href } : { type };
+---
+
+<Tag class:list={classes} {...tagProps} {...rest}><slot /></Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-sans);
+    font-weight: var(--weight-semibold);
+    line-height: 1;
+    text-decoration: none;
+    white-space: nowrap;
+    border: 1px solid transparent;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background var(--duration-base) var(--ease-standard),
+      color var(--duration-base) var(--ease-standard),
+      border-color var(--duration-base) var(--ease-standard),
+      box-shadow var(--duration-base) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard);
+  }
+  .btn:active { transform: translateY(0.5px); }
+  .btn--full { width: 100%; }
+
+  /* Sizes */
+  .btn--sm { height: var(--control-height-sm); padding: 0 14px; font-size: 13px; }
+  .btn--md { height: var(--control-height-md); padding: 0 18px; font-size: 14px; }
+  .btn--lg { height: var(--control-height-lg); padding: 0 24px; font-size: 15px; }
+
+  /* Gold — antique seal */
+  .btn--gold {
+    background: var(--gold-500);
+    color: var(--midnight-900);
+    border-color: var(--gold-500);
+  }
+  .btn--gold:hover {
+    background: var(--gold-400);
+    border-color: var(--gold-400);
+  }
+
+  /* Primary — institutional navy */
+  .btn--primary {
+    background: var(--midnight-700);
+    color: var(--paper-100);
+    border-color: var(--midnight-700);
+  }
+  .btn--primary:hover {
+    background: var(--midnight-600);
+    border-color: var(--midnight-600);
+  }
+
+  /* Secondary — outlined, quiet fill on hover */
+  .btn--secondary {
+    background: transparent;
+    color: var(--text-strong);
+    border-color: var(--border-default);
+  }
+  .btn--secondary:hover { background: var(--surface-sunken); }
+
+  /* Secondary on dark surfaces (hero) */
+  .btn--secondary.btn--on-brand {
+    color: var(--paper-100);
+    border-color: var(--border-on-brand);
+  }
+  .btn--secondary.btn--on-brand:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+</style>

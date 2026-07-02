@@ -1,0 +1,99 @@
+---
+import Badge from './ui/Badge.astro';
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+const pasos: { icon: IconName; date: string; title: string; body: string }[] = [
+  {
+    icon: 'flag',
+    date: 'Septiembre 2026',
+    title: 'Lanzamiento oficial',
+    body: 'Jornada de apertura en sede de AFA. Firma del Acta de Intención general y registro de prensa.',
+  },
+  {
+    icon: 'route',
+    date: 'Oct – Nov 2026',
+    title: 'Fase ejecutiva',
+    body: 'Misiones conjuntas, semanas culturales de naciones en clubes de fútbol y seminarios académicos.',
+  },
+  {
+    icon: 'clipboard-check',
+    date: 'Diciembre 2026',
+    title: 'Evaluación',
+    body: 'Informe ejecutivo de resultados del piloto y convocatoria para el Ciclo Completo 2027.',
+  },
+];
+---
+
+<section id="plan" class="section plan">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Plan de acción 2026 · Ciclo piloto</span>
+      <h2>De la firma a la evaluación</h2>
+    </div>
+
+    <div class="plan__grid">
+      {
+        pasos.map((p, i) => (
+          <div class="plan__step" data-reveal data-stagger={i}>
+            <span class="plan__icon">
+              <Icon name={p.icon} size={20} />
+            </span>
+            <div><Badge tone="gold">{p.date}</Badge></div>
+            <h3 class="plan__title">{p.title}</h3>
+            <p class="plan__body">{p.body}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .plan { background: var(--surface-page); }
+
+  .plan__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .plan__step { padding: 0 24px; }
+  .plan__step:first-child { padding-left: 0; }
+  .plan__step:last-child { padding-right: 0; }
+  .plan__step + .plan__step { border-left: 1px solid var(--border-hairline); }
+
+  .plan__icon {
+    display: inline-flex;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--midnight-700);
+    color: var(--gold-400);
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .plan__title {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: 24px;
+    color: var(--text-strong);
+    margin: 12px 0 8px;
+  }
+  .plan__body {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 760px) {
+    .plan__grid { grid-template-columns: 1fr; gap: 32px; }
+    .plan__step { padding: 0; }
+    .plan__step + .plan__step {
+      border-left: 0;
+      border-top: 1px solid var(--border-hairline);
+      padding-top: 32px;
+    }
+  }
+</style>

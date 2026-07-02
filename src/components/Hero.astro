@@ -1,0 +1,166 @@
+---
+import Button from './ui/Button.astro';
+import Stat from './ui/Stat.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__scrim" aria-hidden="true"></div>
+
+  <div class="hero__inner container">
+    <div class="hero__content">
+      <span class="eyebrow eyebrow--gold hero__eyebrow">
+        Plataforma piloto · Ciclo 2026 · Buenos Aires
+      </span>
+
+      <h1 id="hero-title" class="hero__title">
+        La mística del fútbol,<br />
+        <span class="hero__title-accent">diplomacia pública</span> efectiva.
+      </h1>
+
+      <p class="hero__lead">
+        El Consejo Argentino de Diplomacia Deportiva es un nexo institucional,
+        técnico y neutral que vincula al cuerpo diplomático acreditado en
+        Argentina con el ecosistema del deporte, la academia y la gestión social.
+      </p>
+
+      <div class="hero__actions">
+        <Button variant="gold" size="lg" data-open-contact>
+          Establecer un acuerdo marco
+        </Button>
+        <Button variant="secondary" size="lg" onBrand href="#mision">
+          Conocer el Consejo
+        </Button>
+      </div>
+
+      <div class="hero__stats">
+        <Stat eyebrow="Objetivo" value="05" label="Misiones clave" />
+        <span class="hero__stat-rule" aria-hidden="true"></span>
+        <Stat eyebrow="Visión" value="2027" label="Ciclo completo" />
+        <span class="hero__stat-rule" aria-hidden="true"></span>
+        <Stat eyebrow="Red" value="04" label="Pilares estratégicos" />
+      </div>
+    </div>
+
+    <div class="hero__emblem">
+      <img src="/logo/cadd-emblem.svg" width="260" height="260" alt="Sello del CADD" />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--midnight-900);
+  }
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/imagery/hero-handshake.png');
+    background-size: cover;
+    background-position: center 30%;
+    opacity: 0.22;
+    filter: saturate(0.8);
+    animation: caddZoom 1.6s var(--ease-emphasized) both;
+  }
+  .hero__scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, var(--midnight-900) 30%, rgba(8, 23, 43, 0.6) 100%);
+  }
+  .hero__inner {
+    position: relative;
+    padding-top: 110px;
+    padding-bottom: 96px;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero__eyebrow {
+    animation: caddRise 0.6s var(--ease-emphasized) both;
+    animation-delay: 0.12s;
+  }
+  .hero__title {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: 66px;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin: 20px 0 0;
+    color: var(--paper-100);
+    animation: caddRise 0.7s var(--ease-emphasized) both;
+    animation-delay: 0.22s;
+  }
+  .hero__title-accent {
+    font-style: italic;
+    color: var(--gold-300);
+  }
+  .hero__lead {
+    font-size: 19px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-top: 24px;
+    color: var(--text-on-brand-muted);
+    animation: caddRise 0.7s var(--ease-emphasized) both;
+    animation-delay: 0.34s;
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+    animation: caddRise 0.7s var(--ease-emphasized) both;
+    animation-delay: 0.46s;
+  }
+  .hero__stats {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    margin-top: 48px;
+    animation: caddRise 0.7s var(--ease-emphasized) both;
+    animation-delay: 0.58s;
+  }
+  .hero__stat-rule {
+    width: 1px;
+    height: 56px;
+    background: var(--border-on-brand);
+  }
+
+  .hero__emblem {
+    display: flex;
+    justify-content: center;
+  }
+  .hero__emblem img {
+    width: 260px;
+    height: auto;
+    filter: drop-shadow(0 24px 56px rgba(0, 0, 0, 0.5));
+    animation: caddPop 0.9s var(--ease-emphasized) both;
+    animation-delay: 0.3s;
+  }
+
+  @media (max-width: 900px) {
+    .hero__inner {
+      grid-template-columns: 1fr;
+      padding-top: 88px;
+      padding-bottom: 72px;
+    }
+    .hero__emblem { order: -1; }
+    .hero__emblem img { width: 180px; }
+    .hero__title { font-size: 48px; }
+    .hero__lead { font-size: 18px; }
+  }
+  @media (max-width: 560px) {
+    .hero__inner { padding-top: 72px; padding-bottom: 56px; }
+    .hero__title { font-size: 38px; }
+    .hero__emblem img { width: 140px; }
+    .hero__actions :global(.btn) { width: 100%; }
+    .hero__stats {
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .hero__stat-rule { display: none; }
+  }
+</style>

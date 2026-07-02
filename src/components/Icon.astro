@@ -1,0 +1,23 @@
+---
+import { icons, type IconName } from './icons';
+
+interface Props {
+  name: IconName;
+  size?: number;
+  class?: string;
+  label?: string;
+}
+
+const { name, size = 20, class: className, label } = Astro.props;
+const svg = icons[name];
+const a11y = label
+  ? { role: 'img', 'aria-label': label }
+  : { 'aria-hidden': 'true' };
+---
+
+<span
+  class:list={['icon', className]}
+  style={`--icon-size:${size}px`}
+  {...a11y}
+  set:html={svg}
+/>

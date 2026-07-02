@@ -1,0 +1,136 @@
+---
+import Card from './ui/Card.astro';
+import Divider from './ui/Divider.astro';
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+const pillars: { icon: IconName; title: string; body: string }[] = [
+  {
+    icon: 'shield-check',
+    title: 'Independencia operativa',
+    body: 'Institución autónoma: el Consejo retiene la gobernanza total de su agenda, sin depender del presupuesto público.',
+  },
+  {
+    icon: 'scale',
+    title: 'Nexo neutral',
+    body: 'Su carácter privado lo posiciona como interlocutor ideal y libre de sesgos entre embajadas, clubes, universidades y corporaciones.',
+  },
+  {
+    icon: 'anchor',
+    title: 'Blindaje ante coyunturas',
+    body: 'Ajeno a los vaivenes políticos, partidarios o comerciales del fútbol, garantizando estabilidad a largo plazo.',
+  },
+];
+---
+
+<section id="mision" class="section mission">
+  <div class="container">
+    <div class="mission__top" data-reveal>
+      <div>
+        <span class="eyebrow">Misión</span>
+        <p class="mission__statement">
+          Funcionar como un <em>nexo institucional, técnico y neutral</em> de alta
+          confianza que transforme la cultura del fútbol en una herramienta de
+          diplomacia pública.
+        </p>
+      </div>
+
+      <Card variant="inverse" accent padding="32px">
+        <span class="eyebrow eyebrow--gold">Visión 2027</span>
+        <p class="mission__vision">
+          Ser reconocidos como el principal foro independiente y autárquico de
+          diplomacia deportiva en América Latina, validado por las cancillerías y
+          universidades del mundo.
+        </p>
+      </Card>
+    </div>
+
+    <div class="mission__divider" data-reveal>
+      <Divider label="Naturaleza institucional · Autarquía" />
+    </div>
+
+    <div class="mission__grid">
+      {
+        pillars.map((p, i) => (
+          <div data-reveal data-stagger={i}>
+            <Card hover padding="28px">
+              <span class="mission__icon">
+                <Icon name={p.icon} size={20} />
+              </span>
+              <h3 class="mission__card-title">{p.title}</h3>
+              <p class="mission__card-body">{p.body}</p>
+            </Card>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .mission { background: var(--surface-page); }
+
+  .mission__top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .mission__statement {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin: 16px 0 0;
+    color: var(--text-strong);
+  }
+  .mission__statement em {
+    font-style: italic;
+    color: var(--midnight-600);
+  }
+  .mission__vision {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-top: 14px;
+    color: var(--text-on-brand);
+  }
+
+  .mission__divider { margin: 64px 0 40px; }
+
+  .mission__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .mission__icon {
+    display: inline-flex;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    background: var(--midnight-700);
+    color: var(--gold-400);
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .mission__card-title {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-bold);
+    font-size: 18px;
+    color: var(--text-strong);
+    margin: 0;
+  }
+  .mission__card-body {
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 8px 0 0;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 860px) {
+    .mission__top { grid-template-columns: 1fr; gap: 28px; }
+    .mission__statement { font-size: 26px; }
+    .mission__grid { grid-template-columns: 1fr; }
+    .mission__divider { margin: 48px 0 32px; }
+  }
+</style>

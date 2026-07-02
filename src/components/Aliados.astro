@@ -1,0 +1,114 @@
+---
+import Card from './ui/Card.astro';
+import Tag from './ui/Tag.astro';
+import Icon from './Icon.astro';
+import type { IconName } from './icons';
+
+const aliados: { icon: IconName; title: string; body: string; tags: string[] }[] = [
+  {
+    icon: 'trophy',
+    title: 'Pilar Deportivo-Cultural',
+    body: 'Subcomisión de Cultura de AFA y labor orgánica en el Club Atlético Independiente.',
+    tags: ['AFA', 'C. A. Independiente'],
+  },
+  {
+    icon: 'heart-handshake',
+    title: 'Pilar Social y Comunitario',
+    body: 'Alianza con la Fundación PUPI, conectando el prestigio de Javier Zanetti con la inclusión infantil.',
+    tags: ['Fundación PUPI'],
+  },
+  {
+    icon: 'graduation-cap',
+    title: 'Pilar Académico',
+    body: 'Investigación con la Università di Bologna y proyección de convenios con la UBA.',
+    tags: ['Univ. di Bologna', 'UBA'],
+  },
+  {
+    icon: 'landmark',
+    title: 'Pilar Institucional',
+    body: 'Colaboración proyectada con la AMLRA, abriendo canal de diálogo con el poder legislativo.',
+    tags: ['AMLRA'],
+  },
+];
+---
+
+<section id="aliados" class="section aliados">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <span class="eyebrow">Aliados estratégicos · Gobernanza en red</span>
+      <h2>Una red transversal, sin perder autonomía</h2>
+    </div>
+
+    <div class="aliados__grid">
+      {
+        aliados.map((a, i) => (
+          <div data-reveal data-stagger={i}>
+            <Card accent hover padding="30px" fill>
+              <div class="aliado">
+                <span class="aliado__icon">
+                  <Icon name={a.icon} size={22} />
+                </span>
+                <div class="aliado__body">
+                  <h3 class="aliado__title">{a.title}</h3>
+                  <p class="aliado__text">{a.body}</p>
+                  <div class="aliado__tags">
+                    {a.tags.map((t) => (
+                      <Tag>{t}</Tag>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .aliados { background: var(--surface-page); }
+
+  .aliados__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .aliado {
+    display: flex;
+    gap: 18px;
+  }
+  .aliado__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--gold-200);
+    color: var(--gold-700);
+    align-items: center;
+    justify-content: center;
+  }
+  .aliado__title {
+    font-family: var(--font-sans);
+    font-weight: var(--weight-bold);
+    font-size: 18px;
+    color: var(--text-strong);
+    margin: 0;
+  }
+  .aliado__text {
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 8px 0 14px;
+    color: var(--text-muted);
+  }
+  .aliado__tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 760px) {
+    .aliados__grid { grid-template-columns: 1fr; }
+  }
+</style>

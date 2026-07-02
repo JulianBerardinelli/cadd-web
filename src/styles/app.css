@@ -1,0 +1,182 @@
+/* ============================================================
+   CADD — estilos globales de la app (sobre tokens.css).
+   Resets base del sistema + primitivas de layout, animaciones
+   de entrada, íconos y reglas responsive.
+   ============================================================ */
+
+/* ---- Base resets (del design-system: base.css) ----------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-body-md);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+  background: var(--surface-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  margin: 0;
+}
+
+h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-strong);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+}
+
+p { margin: 0; }
+
+a {
+  color: var(--text-link);
+  text-decoration: none;
+}
+
+img { max-width: 100%; }
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+  border-radius: var(--radius-sm);
+}
+
+/* ---- Eyebrow / kicker: mono, uppercase, tracked ---------- */
+.eyebrow {
+  display: block;
+  font-family: var(--font-eyebrow);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--text-accent);
+}
+.eyebrow--gold { color: var(--gold-400); }
+
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ---- Layout primitives ----------------------------------- */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section {
+  padding: 96px 0;
+  scroll-margin-top: 80px;
+}
+
+.section-head {
+  max-width: 720px;
+  margin-bottom: 40px;
+}
+.section-head h2 {
+  font-family: var(--font-serif);
+  font-weight: var(--weight-semibold);
+  font-size: 40px;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 12px 0 0;
+}
+.section-head p {
+  font-size: 18px;
+  line-height: 1.6;
+  margin-top: 16px;
+}
+
+/* ---- Iconos (lucide-static inline) ----------------------- */
+.icon {
+  display: inline-flex;
+  line-height: 0;
+  color: currentColor;
+}
+.icon svg {
+  width: var(--icon-size, 20px);
+  height: var(--icon-size, 20px);
+  display: block;
+}
+
+/* ---- Animaciones de entrada ------------------------------ */
+@keyframes caddRise {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes caddFadeDown {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes caddFade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes caddPop {
+  from { opacity: 0; transform: translateY(14px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes caddZoom {
+  from { transform: scale(1.14); }
+  to   { transform: scale(1); }
+}
+
+/* ---- Reveal por scroll (progressive enhancement) --------- */
+/* Sin JS o con reduce-motion, el contenido queda visible. El
+   estado oculto solo se aplica cuando <html> tiene .reveal-js. */
+[data-reveal] {
+  transition: opacity 0.64s var(--ease-emphasized),
+              transform 0.64s var(--ease-emphasized);
+}
+html.reveal-js [data-reveal] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+html.reveal-js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Reduce motion --------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 960px) {
+  .section { padding: 72px 0; }
+  .section-head h2 { font-size: 34px; }
+}
+
+@media (max-width: 640px) {
+  .container { padding: 0 20px; }
+  .section { padding: 56px 0; }
+  .section-head { margin-bottom: 28px; }
+  .section-head h2 { font-size: 28px; }
+  .section-head p { font-size: 16px; }
+}

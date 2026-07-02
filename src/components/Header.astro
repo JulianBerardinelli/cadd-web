@@ -1,0 +1,95 @@
+---
+import Button from './ui/Button.astro';
+import Icon from './Icon.astro';
+
+const nav = [
+  { href: '#mision', label: 'Misión' },
+  { href: '#objetivos', label: 'Objetivos' },
+  { href: '#aliados', label: 'Aliados' },
+  { href: '#equipo', label: 'Equipo' },
+  { href: '#plan', label: 'Plan 2026' },
+];
+---
+
+<header class="site-header">
+  <div class="site-header__row">
+    <a href="#top" class="brand" aria-label="CADD — inicio">
+      <img src="/logo/cadd-emblem.svg" width="42" height="42" alt="" class="brand__mark" />
+      <span class="brand__name">Consejo Argentino<br />de Diplomacia Deportiva</span>
+    </a>
+
+    <nav class="site-nav" aria-label="Secciones">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <Button variant="gold" size="sm" class="site-header__cta" data-open-contact>
+      <Icon name="file-signature" size={15} />
+      <span>Solicitar convenio</span>
+    </Button>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(8, 23, 43, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-on-brand);
+  }
+  .site-header__row {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 14px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    animation: caddFadeDown 0.5s var(--ease-standard) both;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+  }
+  .brand__mark { display: block; flex-shrink: 0; }
+  .brand__name {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: 16px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--paper-100);
+  }
+
+  .site-nav {
+    margin-left: auto;
+    display: flex;
+    gap: 2px;
+  }
+  .site-nav a {
+    padding: 8px 14px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: var(--weight-medium);
+    color: var(--text-on-brand-muted);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-standard);
+  }
+  .site-nav a:hover { color: var(--gold-400); }
+
+  /* Tablet / mobile: nav collapses; brand + CTA remain */
+  @media (max-width: 860px) {
+    .site-nav { display: none; }
+    .site-header__row { gap: 16px; }
+    .brand__name { font-size: 15px; }
+  }
+  @media (max-width: 560px) {
+    .site-header__row { padding: 12px 20px; }
+    .site-header__cta span { display: none; }
+  }
+</style>

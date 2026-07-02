@@ -1,0 +1,80 @@
+---
+type Variant = 'default' | 'inverse';
+
+interface Props {
+  variant?: Variant;
+  accent?: boolean;
+  hover?: boolean;
+  padding?: string;
+  fill?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'default',
+  accent = false,
+  hover = false,
+  padding = '24px',
+  fill = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const classes = [
+  'card',
+  `card--${variant}`,
+  accent && 'card--accent',
+  hover && 'card--hover',
+  fill && 'card--fill',
+  className,
+];
+---
+
+<div class:list={classes} style={`--card-padding:${padding}`} {...rest}>
+  <slot />
+</div>
+
+<style>
+  .card {
+    position: relative;
+    padding: var(--card-padding);
+    border-radius: var(--radius-card);
+    background: var(--surface-card);
+    border: 1px solid var(--border-hairline);
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform var(--duration-base) var(--ease-standard),
+      box-shadow var(--duration-base) var(--ease-standard);
+  }
+
+  .card--inverse {
+    background: var(--surface-brand);
+    border-color: var(--border-on-brand);
+    color: var(--text-on-brand);
+  }
+
+  /* Gold hairline along the top edge */
+  .card--accent::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-500), var(--gold-400));
+    border-top-left-radius: var(--radius-card);
+    border-top-right-radius: var(--radius-card);
+  }
+
+  .card--hover:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Full-height card (equal-height grids, e.g. team) */
+  .card--fill {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+</style>

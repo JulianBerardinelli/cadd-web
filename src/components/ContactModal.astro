@@ -1,0 +1,286 @@
+---
+import Button from './ui/Button.astro';
+import Icon from './Icon.astro';
+---
+
+<div
+  class="modal"
+  id="contact-modal"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="contact-modal-title"
+  hidden
+>
+  <div class="modal__scrim" data-close-contact></div>
+
+  <div class="modal__panel" role="document">
+    <div class="modal__header">
+      <img src="/logo/cadd-emblem.svg" width="48" height="48" alt="" />
+      <div>
+        <div class="modal__title" id="contact-modal-title">Solicitar convenio</div>
+        <div class="modal__sub">Acta de intención · Ciclo 2026</div>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <form class="modal__form" data-modal-form novalidate>
+      <div class="field">
+        <label class="field__label" for="mf-inst">Institución / Misión</label>
+        <input class="field__control" id="mf-inst" name="institucion" type="text" placeholder="Embajada de…" required />
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label class="field__label" for="mf-ref">Referente</label>
+          <input class="field__control" id="mf-ref" name="referente" type="text" placeholder="Nombre y apellido" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="mf-pilar">Pilar de interés</label>
+          <select class="field__control" id="mf-pilar" name="pilar">
+            <option value="dep">Deportivo-Cultural</option>
+            <option value="soc">Social y Comunitario</option>
+            <option value="aca">Académico</option>
+            <option value="ins">Institucional</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="mf-mail">Correo institucional</label>
+        <input class="field__control" id="mf-mail" name="correo" type="email" placeholder="nombre@cancilleria.gob" required />
+      </div>
+
+      <Button variant="gold" size="lg" type="submit" fullWidth>Enviar solicitud</Button>
+    </form>
+
+    <!-- Estado de éxito -->
+    <div class="modal__done" data-modal-done hidden>
+      <Icon name="check-circle" size={40} class="modal__done-icon" />
+      <h3 class="modal__done-title">Solicitud registrada</h3>
+      <p class="modal__done-text">El Consejo se pondrá en contacto para coordinar la firma.</p>
+      <div class="modal__done-action">
+        <Button variant="primary" data-close-contact>Cerrar</Button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal[hidden] { display: none; }
+
+  .modal__scrim {
+    position: absolute;
+    inset: 0;
+    background: var(--overlay-scrim);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    animation: caddFade 0.18s var(--ease-standard) both;
+  }
+
+  .modal__panel {
+    position: relative;
+    width: 520px;
+    max-width: 100%;
+    background: var(--surface-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-xl);
+    animation: caddPop 0.3s var(--ease-emphasized) both;
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+  }
+
+  .modal__header {
+    background: var(--midnight-800);
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .modal__title {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: 20px;
+    color: var(--paper-100);
+  }
+  .modal__sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--gold-400);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .modal__form {
+    padding: 24px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .field { display: flex; flex-direction: column; }
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .field__label {
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: var(--weight-semibold);
+    color: var(--text-strong);
+    margin-bottom: 6px;
+  }
+  .field__control {
+    width: 100%;
+    height: 44px;
+    padding: 0 12px;
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--text-strong);
+    background: var(--paper-100);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-md);
+    transition: border-color var(--duration-base) var(--ease-standard),
+      box-shadow var(--duration-base) var(--ease-standard);
+  }
+  .field__control::placeholder { color: var(--text-faint); }
+  .field__control:focus {
+    outline: none;
+    border-color: var(--gold-500);
+    box-shadow: var(--ring-gold);
+  }
+  select.field__control {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23707d88' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+
+  .modal__done {
+    padding: 40px 28px;
+    text-align: center;
+  }
+  .modal__done[hidden] { display: none; }
+  .modal__done-icon { color: var(--status-success); }
+  .modal__done-title {
+    font-family: var(--font-serif);
+    font-weight: var(--weight-semibold);
+    font-size: 24px;
+    color: var(--text-strong);
+    margin: 12px 0 6px;
+  }
+  .modal__done-text {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin: 0;
+  }
+  .modal__done-action {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 480px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  const modal = document.getElementById('contact-modal');
+  if (modal) {
+    const form = modal.querySelector<HTMLFormElement>('[data-modal-form]');
+    const done = modal.querySelector<HTMLElement>('[data-modal-done]');
+    const panel = modal.querySelector<HTMLElement>('.modal__panel');
+    let lastFocused: HTMLElement | null = null;
+
+    const focusable = () =>
+      Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ).filter((el) => el.offsetParent !== null || el === document.activeElement);
+
+    const open = () => {
+      lastFocused = document.activeElement as HTMLElement;
+      // reset to form view each time it opens
+      form?.removeAttribute('hidden');
+      done?.setAttribute('hidden', '');
+      form?.reset();
+      modal.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+      requestAnimationFrame(() => {
+        const first = focusable()[0];
+        first ? first.focus() : panel?.focus();
+      });
+    };
+
+    const close = () => {
+      modal.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+      lastFocused?.focus?.();
+    };
+
+    const showSuccess = () => {
+      form?.setAttribute('hidden', '');
+      done?.removeAttribute('hidden');
+      requestAnimationFrame(() => focusable()[0]?.focus());
+    };
+
+    document.querySelectorAll('[data-open-contact]').forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        open();
+      })
+    );
+
+    modal.querySelectorAll('[data-close-contact]').forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        close();
+      })
+    );
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Formulario demostrativo (sin backend): mostrar confirmación.
+      if (form.checkValidity()) {
+        showSuccess();
+      } else {
+        form.reportValidity();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (modal.hasAttribute('hidden')) return;
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        close();
+      } else if (e.key === 'Tab') {
+        const items = focusable();
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+  }
+</script>

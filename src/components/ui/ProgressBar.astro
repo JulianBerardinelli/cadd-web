@@ -1,0 +1,64 @@
+---
+interface Props {
+  value: number;
+  label?: string;
+  showValue?: boolean;
+  tone?: 'gold';
+}
+const { value, label, showValue = false, tone = 'gold' } = Astro.props;
+const clamped = Math.max(0, Math.min(100, value));
+---
+
+<div class:list={['progress', `progress--${tone}`]}>
+  {
+    (label || showValue) && (
+      <div class="progress__meta">
+        {label && <span class="progress__label">{label}</span>}
+        {showValue && <span class="progress__value tnum">{clamped}%</span>}
+      </div>
+    )
+  }
+  <div
+    class="progress__track"
+    role="progressbar"
+    aria-valuenow={clamped}
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-label={label}
+  >
+    <div class="progress__fill" style={`width:${clamped}%`}></div>
+  </div>
+</div>
+
+<style>
+  .progress__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .progress__label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-on-brand-muted);
+  }
+  .progress__value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: var(--weight-medium);
+    color: var(--gold-400);
+  }
+  .progress__track {
+    height: 6px;
+    border-radius: var(--radius-pill);
+    background: rgba(255, 255, 255, 0.12);
+    overflow: hidden;
+  }
+  .progress__fill {
+    height: 100%;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(90deg, var(--gold-600), var(--gold-400));
+  }
+</style>
